@@ -37,17 +37,29 @@ for i = dvec
         
     out_data = [outdir name '_' cpf.get_param '.mat'];
 
-    try  
-        cpf.solve();
-
-    catch ME
-        fprintf('Mesh %s failed.',name);
-        save(out_data,'cpf','ME');
+    success = 0; ME = [];
+    while ~success
+        try  
+            cpf.solve();
+            success = 1;
+        catch ME
+            if contains(ME.message,'Barrier') & cpf.iter_opt<3
+                warning(['Barrier failed, perr = %.2g, '...
+                    'rerunning with iter_opt = %d'], ...
+                    cpf.perr, cpf.iter_opt);
+                cpf.iter_opt = cpf.iter_opt+1;
+            else
+                success = 2; % didn't really succeed
+                fprintf('Mesh %s failed.',name);
+                save(out_data,'cpf','ME');
+            end
+        end
+    end
+    if success == 2
         continue;
     end
     save(out_data,'cpf');
     
-
     % Vis results:
     ff = cpf.Mp.planarity_general;
     figure;
