@@ -7,7 +7,7 @@ n = 6;                  % 4 - for quads, 6 - hexes
 
 % Set params:
 delta = 0.005;          % scaling parameter: max distance from surface, as a fraction of model's bounding box
-eta = 0.002;            % scaling parameter: area of max element, as a fraction of total surface area - 0.001
+eta = 0.002;            % scaling parameter: area of max element, as a fraction of total surface area
 mp = 1;                 % maximal planarity, in precentage
 
 datadir = 'data/';
@@ -46,7 +46,7 @@ for i = dvec
             if contains(ME.message,'Barrier') & cpf.iter_opt<3
                 warning(['Barrier failed, perr = %.2g, '...
                     'rerunning with iter_opt = %d'], ...
-                    cpf.perr, cpf.iter_opt);
+                    cpf.perr, cpf.iter_opt+1);
                 cpf.iter_opt = cpf.iter_opt+1;
             else
                 success = 2; % didn't really succeed
@@ -95,12 +95,12 @@ params = [params, {'outdir'}, {outdir}];    % ouutput folder
 
 % Additional optional inputs:
 % lr                                          % edge length for parameterization and meshing,
-                                            % if not set, it is computed automaticly.
-% rhow                                        % alignment's weighting. 
+                                            % if not set, it is computed automaticly
+% rhow                                        % alignment's weighting
                                             % 0 - no weighing, 1 - weighting with RHO squared, 2 - polynomial weighting
 % dualize                                     % whether to dualize the remeshed mesh, relevant only for quads, default 1
 % planar                                      % whether to planarize the remeshed mesh, default 1
-% figs                                        % open figures while running
+% figs                                        % whether to open figures while running, default 0
 
 
 
