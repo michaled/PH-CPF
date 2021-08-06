@@ -27,13 +27,13 @@ If you have any questions or issues running the code, please open an issue or co
 git clone https://github.com/michaled/PH-CPF.git
 ```
 
-- Run the ```runme.m``` script in Matlab
+- Run the ```runme.m``` script in MATLAB
 
 
 ### Note
-- This is a MATLAB implementation and requires Matlab 2019a or newer
+- This is a MATLAB implementation and requires MATLAB 2019a or newer
 
-- This code includes windows precompiled binaries. The source code and versions for MacOS and Linux are coming soon!
+- This code includes Windows precompiled binaries. The source code and versions for MacOS and Linux are coming soon!
  
 
  

@@ -44,9 +44,8 @@ for i = dvec
             success = 1;
         catch ME
             if contains(ME.message,'Barrier') & cpf.iter_opt<3
-                warning(['Barrier failed, perr = %.2g, '...
-                    'rerunning with iter_opt = %d'], ...
-                    cpf.perr, cpf.iter_opt+1);
+                warning('Barrier failed, rerunning with iter_opt = %d', ...
+                    cpf.iter_opt+1);
                 cpf.iter_opt = cpf.iter_opt+1;
             else
                 success = 2; % didn't really succeed
