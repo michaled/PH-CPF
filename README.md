@@ -41,6 +41,7 @@ git clone https://github.com/michaled/PH-CPF.git
  - meshname.out.off - the primal mesh
  - meshname.out_d.off - the dualized mesh (if requested)
  - meshname.out_d_p.off - the planarized mesh (or meshname.out_p.off without dualization)
+ - meshname.out_d_p_tri.off - the triangulated planarized mesh (or meshname.out_p_tri.off without dualization)
  - meshname.obj - the cut mesh with texture coordinates
 
 

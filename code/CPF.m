@@ -1401,6 +1401,11 @@ classdef CPF < handle
                 else
                     cpf.Mp = cpf.planarize(cpf.Mr);
                 end
+                
+                % save the triangulated hex
+                % note that this code uses a basic triangulation and can result in intersecting triangles
+                outmesh_planar_tri = [cpf.Mp.name '_tri.off'];
+                MESH_IO.woffp(outmesh_planar_tri,cpf.Mp.vertices,cpf.Mp.faces);
             end
             
             % save results to OBJ files
@@ -1652,7 +1657,6 @@ classdef CPF < handle
             end
 
             % Cutter
-            %   -i,--input TEXT:FILE REQUIRED         input mesh.
             %   -h,--help                             Print this help message and exit 
             %   -i,--input TEXT:FILE REQUIRED         The path to the OFF file containing the input mesh. 
             %   -f,--input_field TEXT:FILE REQUIRED   The path to the rawfield file containing the vector field. 

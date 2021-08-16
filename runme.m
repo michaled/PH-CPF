@@ -10,7 +10,8 @@ delta = 0.005;          % scaling parameter: max distance from surface, as a fra
 eta = 0.002;            % scaling parameter: area of max element, as a fraction of total surface area
 mp = 1;                 % maximal planarity, in precentage
 
-datadir = 'data/';
+datadir = 'data/';      % this script will run on all the meshes in 'datadir'
+
 outdir = sprintf('results_%s/', datestr(now,'mm-dd-yyyy'));
 if ~exist(outdir, 'dir')
     mkdir(outdir);
@@ -26,9 +27,12 @@ dvec = 1:length(Dnames);
 
 pl_cm = load('planarity_colormap.mat'); pl_cm = pl_cm.cm1;
 
+
 for i = dvec
     name = DnamesS{i};
-    name = name(1:end-4);
+    name = name(1:end-4); % to run on a single mesh, instead of the for loop, set 'name' to mesh name, for example:
+                          % name = 'metro';
+                          % the mesh folder should be in the current path
     disp(name);
         
     cpf = CPF(name);
