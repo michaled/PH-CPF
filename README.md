@@ -44,6 +44,11 @@ git clone https://github.com/michaled/PH-CPF.git
  - meshname.out_d_p_tri.off - the triangulated planarized mesh (or meshname.out_p_tri.off without dualization)
  - meshname.obj - the cut mesh with texture coordinates
 
+#### Triangulation
+Most of the rendering software packages triangulate a polygonal input mesh to render it.
+Therefore, if the triangulation fails, the mesh will not be displayed or it might show visual artifacts such as holes and inverted triangles.
+Hence, we additionally provide as output a triangulated version for rendering purposes.
+However, please note, that our triangulation algorithm is also not perfect, and thus may lead to self intersections (even in cases when the input polygonal faces were intersection-free).
 
 ## Dependencies
  
