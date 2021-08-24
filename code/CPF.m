@@ -350,19 +350,15 @@ classdef CPF < handle
             % normalize optimization parameters so they have the same units
             % according to n, g and mesh edge lengths            
             % 2 vectors per face, 2d mel^2    
-%            lsi_units = cpf.mel2d^2*cpf.M.nf*2;
             lsi_units = cpf.M.nf*2;
 
             % edge length ^ n ^ 2
-%            lc_units = cpf.mel2d^(2*cpf.n)*cpf.M.ne;
             lc_units = cpf.mel2d^(2*cpf.n)*cpf.M.ne;
-%            lc_units = cpf.M.nie*2;
             lsm_units = lc_units;
 
             lin_units = cpf.M.nf;
             lcj_units = cpf.M.nf*2;
-            lo_units = cpf.M.nf*2;
-%            la_units = 1;                       
+            lo_units = cpf.M.nf*2;          
             la_units = cpf.mel2d^2;
             
             % Make parameters unitless
@@ -1351,8 +1347,6 @@ classdef CPF < handle
             cpf.U = reshape(CM.EBI*epf(2*CM.nie+1:2*CM.nie+2*CM.nf),[],3);
             cpf.V = reshape(CM.EBI*epf(2*CM.nie+2*CM.nf+1:end),[],3);
             
-            cpf.mtime
-
             if cpf.profile
                 profile off;
             end
@@ -1370,7 +1364,7 @@ classdef CPF < handle
         % Main algorithm, including all the required sub-steps :)
         function solve( cpf )            
             % optimize for smooth & aligned power coordinate fields
-            fprintf('Optimize for smooth & aligned power coordinate fields\n\n');
+            fprintf('Optimize for smooth & aligned power coordinate fields\n');
             cpf.opt_power_cfs();
             fprintf('\n');
             
@@ -1409,7 +1403,7 @@ classdef CPF < handle
             end
             
             % save results to OBJ files
-            fprintf('Store results in OBJ files\n\n');
+            fprintf('Store results in OBJ files\n');
             cpf.store_obj();
 
             % plot the result
@@ -1436,7 +1430,7 @@ classdef CPF < handle
             CM = cpf.M;
 
             %% 1. UV to grads
-            fprintf('Convert to gradients\n\n');
+            fprintf('Convert to gradients\n');
             [gradu, gradv] = ...
                 CPF.uv2grads(CM.EB*U(:),CM.EB*V(:),CM.nf);
             % In extrinsic basis
@@ -1449,7 +1443,7 @@ classdef CPF < handle
             cpf.vis_sing(cpf.S);
             
             %% 3. cut mesh with directional and prepare for parameterization
-            fprintf('Cut mesh\n\n');
+            fprintf('Cut mesh\n');
             [cpf.graduc, cpf.gradvc, cpf.M_c, cpf.M_c_ni, cpf.S, ...
                 cpf.Fc, cpf.mtchc, cpf.pd] = ...
                     cpf.cut_and_comb(cpf.gradu, cpf.gradv, cpf.mtch, cpf.S);
@@ -1468,7 +1462,7 @@ classdef CPF < handle
             %% 4. parameterize without integer translations
             % 5. parameterize with integer translations
             % 6. Mesh (and dualize if needed)
-            fprintf('Parameterize and mesh\n\n');
+            fprintf('Parameterize and mesh\n');
             [Mr,Mrd] = cpf.param_and_mesh;
         end
         
@@ -1869,6 +1863,7 @@ classdef CPF < handle
             eval( cmdline );   
 
             %% BarrierPoissonSolve
+            fprintf('Barrier Poisson Solve\n');
             BarrierPoissonSolve;
             
             % Poisson error before integers
@@ -1924,7 +1919,8 @@ classdef CPF < handle
                 cpf.mesherdir, cpf.mesherbin,...
                 cpf.datadir, cpf.M.name, mesh_cut, outmesh_ns, outmesh, ...
                 param_out, ...
-                outcf, outvf)
+                outcf, outvf);
+            fprintf('Mesher\n');
             eval( cmdline );    
 
             
@@ -1935,6 +1931,7 @@ classdef CPF < handle
                 cmdline = sprintf('!"%s%s" %s.off %s.off -b CLIPPED_OLD', ...
                     cpf.dualizerdir, cpf.dualizerbin,...
                     outmesh, outmesh_dual);
+                fprintf('Dualizer\n');
                 eval( cmdline );    
                 Mrd = MESHP(outmesh_dual);            
             end            
@@ -1977,6 +1974,7 @@ classdef CPF < handle
             if cpf.planarize_sing_cor
                cmdline = sprintf('%s -s',cmdline);
             end
+            fprintf('Planarizer\n');
             eval(cmdline);       
             Mp = MESHP(outmesh_planar);
         end

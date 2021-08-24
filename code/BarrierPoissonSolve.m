@@ -116,7 +116,7 @@ packetSize=1;
 roundCoeff=1;
 success=1;
 while (i<=length(integerIndices))
-    i
+    % i
     xprev=xcurr;
     roundDiffs= abs(fraction*xcurr(leftIndices)-roundCoeff*round(fraction*xcurr(leftIndices)/roundCoeff));
     [~,minRoundIndices]=sort(roundDiffs);
@@ -131,7 +131,7 @@ while (i<=length(integerIndices))
     fixedValues=[fixedValues;roundValues];
     leftIndices(minRoundIndices)=[];
     options=optimoptions('lsqnonlin','Algorithm','levenberg-marquardt',...
-        'display', 'iter-detailed','MaxIterations', 250, ...
+        'display', 'off','MaxIterations', 250, ...
         'SpecifyObjectiveGradient',true,...
         'FiniteDifferenceType', 'central');%,'CheckGradients', true); 
     objfun = @(xcurr)objective(xcurr,xprev,A,b,C, G2, N, FN, fixedIndices, fixedValues, s, wobj,wclose, wconst, wbarrier, IImagField, JImagField,origFieldVolumes);

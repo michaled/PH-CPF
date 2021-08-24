@@ -58,7 +58,7 @@ classdef OPT < handle
             
             opt.Algorithm                   = 'levenberg-marquardt';
 %            opt.Algorithm                   = 'trust-region-reflective';
-            opt.Display                     = 'iter-detailed';
+            opt.Display                     = 'off'; % 'iter-detailed';
             opt.ScaleProblem                = 'jacobian';
             opt.MaxIterations               = 2000;
             opt.SpecifyObjectiveGradient    = true;

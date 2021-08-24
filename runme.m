@@ -66,8 +66,7 @@ for i = dvec
     % Vis results:
     ff = cpf.Mp.planarity_general;
     figure;
-    MESH_VIS.func(cpf.Mp, ff, 'edgecolor', 'k'); 
-    colormap(pl_cm); caxis([0,mp]);
+    MESH_VIS.func(cpf.Mp, ff, 'edgecolor', 'k', 'func_type', 'f', 'Colormap', pl_cm, 'Caxis', [0,mp]);
 end
 
 

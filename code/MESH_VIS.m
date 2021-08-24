@@ -113,6 +113,7 @@ classdef MESH_VIS
             addOptional(p,'Colormap','jet');
             addOptional(p,'OpenGL',0);
             addOptional(p,'LightPos',[0 0 1]);
+            addOptional(p,'func_type',[]);
             parse(p,varargin{:});
             
             szf = size(f);
@@ -121,9 +122,14 @@ classdef MESH_VIS
             end
             
             FC = 'w';
-            if szf(1) == M.nv; FC = 'interp';
-            elseif szf(1) == M.nf; FC = 'flat';
-            elseif szf(1) == M.ne
+            if (isempty(p.Results.func_type) && szf(1) == M.nv) || ...
+                    (strcmp(p.Results.func_type,'v') && szf(1) == M.nv)
+                FC = 'interp';
+            elseif (isempty(p.Results.func_type) && szf(1) == M.nf) || ...
+                    (strcmp(p.Results.func_type,'f') && szf(1) == M.nf)
+                FC = 'flat';
+            elseif (isempty(p.Results.func_type) && szf(1) == M.ne) || ...
+                    (strcmp(p.Results.func_type,'e') && szf(1) == M.ne)
                 M = MESH_VIS.nc_mesh( M );
                 patch('faces',M.om.triangles,'vertices',M.vertices, ...
                     'FaceColor',FC, ...
