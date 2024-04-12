@@ -5,11 +5,11 @@ MATLAB implementation of
 "PH-CPF: Planar Hexagonal Meshing using Coordinate Power Fields" by 
 [Kacper Pluta](https://copyme.github.io/), 
 Michal Edelstein, 
-[Amir Vaxman](https://webspace.science.uu.nl/~vaxma001/) and 
+[Amir Vaxman](https://avaxman.github.io/) and 
 [Mirela Ben-Chen](https://mirela.net.technion.ac.il/).
 
-[Paper](https://www.cs.technion.ac.il/~mirela/publications/phcpf.pdf), 
-[Supplemental](https://www.cs.technion.ac.il/~mirela/publications/phcpf-supp.pdf), 
+[Paper](https://mirelabc.github.io/publications/phcpf.pdf), 
+[Supplemental](https://mirelabc.github.io/publications/phcpf-supp.pdf), 
 [Video](https://www.youtube.com/playlist?list=PLIFSk5-vAIZ01pnibtAh5Vz87gNNqmbC_)
 
 
